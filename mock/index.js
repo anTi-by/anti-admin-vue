@@ -15,6 +15,7 @@ const mocks = [
  
 // 重新定义XMLHttpRequest，针对Mock
 export function mockXHR() {
+
   Mock.XHR.prototype.proxy_send = Mock.XHR.prototype.send
   Mock.XHR.prototype.send = function() {
     if (this.custom.xhr) {

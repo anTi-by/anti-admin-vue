@@ -1,11 +1,11 @@
 import Mock from 'mockjs'
- 
 const data = Mock.mock({  // 模拟数据生成，遵循Mock语法规范
-  'items|30': [{
+  'items|5': [{
     id: '@id',
     title: '@sentence(10, 20)',
     'status|1': ['published', 'draft', 'deleted'],
     author: 'name',
+    'f':process.env.NODE_ENV,
     display_time: '@datetime',
     pageviews: '@integer(300, 5000)'
   }]
