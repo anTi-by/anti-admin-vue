@@ -1,6 +1,35 @@
 <template>
  <div class="login-container"  style="background-image: url(/img/bg.jpg);background-size: 100% 100%;">
-    <el-form ref="loginForm" :model="loginForm"  class="login-form" auto-complete="on" label-position="left">
+    <div class="login-weaper">
+      <div class="login-left">
+        <p class="login-time">
+          {{time}}
+        </p>
+        <img class="img"
+             src="/img/logo.png"
+             alt="">
+        <p class="title">AnTi 企业级开发平台</p>
+      </div>
+      <div class="login-border">
+        <div class="login-top"></div>
+        <div class="login-main">
+          <h4 class="login-title">
+            登录 AnTi
+          </h4>
+          <userloginform v-if="activeName==='user'"></userloginform>
+          <div class="login-menu">
+            <a href="#"   
+               @click.stop="activeName='user'">账号密码</a>
+            <a href="#"
+               @click.stop="activeName='code'">手机号登录</a>
+            <a href="#"
+               @click.stop="activeName='third'">第三方登录</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- <el-form ref="loginForm" :model="loginForm"  class="login-form" auto-complete="on" label-position="left">
       <div class="title-container">
         <h3 class="title">邻家小铺</h3>
       </div>
@@ -45,49 +74,46 @@
           <span>密码 : developer</span>
         </div>
       </div>
-    </el-form>
+    </el-form> -->
   </div>
 </template>
 
 <script>
+import { dateFormat } from "@/utils/date";
+import userloginform from "./userLoginForm"
 export default {
   name: 'login',
+  components: {
+    userloginform
+  },
   data() {
     return {
-       loginForm: {
-        username: '',
-        password: ''
-      },
-      // loginRules: {
-      //   username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-      //   password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+      //  loginForm: {
+      //   username: '',
+      //   password: ''
       // },
       loading: false,
       pwdType: 'password',
-      redirect:'/'
+      activeName:'user',
+      time: "2020-03-28 19:41"
     };
   },
   computed:{
   },
   watch:{
   },
+  created() {
+    this.getTime();
+    setInterval(() => {
+      this.getTime();
+    }, 1000);
+  },
+  mounted() {},
+  props: [],
   methods: {
-    init(){
-      let redirect = this.$route.query.redirect
-      if(redirect){
-        this.redirect = redirect
-        console.log(redirect+"-----");
-      }
-    },
-    showPwd() {
-      if (this.pwdType === 'password') {
-        this.pwdType = ''
-      } else {
-        this.pwdType = 'password'
-      }
-    },
-    handleLogin:function(){
-      console.log("handleLogin");
+
+    getTime:function() {
+      this.time = dateFormat(new Date());
     }
   },
 };
@@ -106,97 +132,110 @@ $cursor: #fff;
     }
   }
 }
-
-/* reset element-ui css */
-.login-container {
-  .el-input {
-    display: inline-block;
-    height: 47px;
-    width: 85%;
-    input {
-      background: transparent;
-      border: 0px;
-      -webkit-appearance: none;
-      border-radius: 0px;
-      padding: 12px 5px 12px 15px;
-      color: $light_gray;
-      height: 47px;
-      caret-color: $cursor;
-      &:-webkit-autofill {
-        -webkit-box-shadow: 0 0 0px 1000px $bg inset !important;
-        -webkit-text-fill-color: $cursor !important;
-      }
-    }
-  }
-  .el-form-item {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    color: #454545;
-  }
+*{
+  padding: 0px;
+  margin: 0px;
 }
-$bg:#2d3a4b;
-$dark_gray:#889aa4;
-$light_gray:#eee;
-
 .login-container {
   min-height: 100%;
   width: 100%;
   overflow: hidden;
-  .login-form {
-    position: relative;
-    width: 520px;
-    max-width: 100%;
-    padding: 160px 35px 0;
+  display:flex;
+  flex-direction:row;
+  justify-content:center;
+  align-items:center;
+  .login-weaper{
     margin: 0 auto;
-    overflow: hidden;
-  }
-  .tips {
-    font-size: 14px;
-    color: #fff;
-    margin-bottom: 10px;
-    span {
-      &:first-of-type {
-        margin-right: 16px;
+    width: 1000px;
+    height: 600px;
+    box-shadow: -4px 5px 10px rgba(0, 0, 0, 0.4);
+    .login-left{
+        height: 100%;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        background-color: #409eff;
+        color: #fff;
+        float: left;
+        width: 50%;
+        position: relative;
+        align-items: center;
+        .login-time {
+            position: absolute;
+            left: 30px;
+            top: 35px;
+            color: #fff;
+            font-weight: 200;
+            opacity: 0.9;
+            font-size: 18px;
+            overflow: hidden;
+        }
+        .img{
+          margin-top: 160px;
+          width: 140px;
+        }
+        .title{
+           margin-top: 60px;
+           text-align: center;
+           color: #fff;
+           font-weight: 300;
+           letter-spacing: 2px;
+           font-size: 25px;
+        }
+    }
+    .login-border {
+      border-left: none;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      color: #fff;
+      background-color: #fff;
+      height: 100%;
+      width: 50%;
+      float: left;
+      box-sizing: border-box;
+      .login-top{
+        width: 65%;
+        height: 5%;
+      }
+      .login-main {
+        margin: 0 auto;
+        width: 65%;
+        height: 90%;
+        box-sizing: border-box;
+        padding-top: 40px;
+      }
+      .login-main > h3 {
+        margin-bottom: 20px;
+      }
+      .login-main > p {
+        color: #76838f;
+      }
+      .login-title {
+        color: #333;
+        margin-bottom: 40px;
+        font-weight: 500;
+        font-size: 22px;
+        text-align: center;
+        letter-spacing: 4px;
       }
     }
   }
-  .svg-container {
-    padding: 6px 5px 6px 15px;
-    color: $dark_gray;
-    vertical-align: middle;
-    width: 30px;
-    display: inline-block;
-  }
-  .title-container {
-    position: relative;
-    .title {
-      font-size: 46px;
-      color: $light_gray;
-      margin: 0px auto 40px auto;
-      text-align: center;
-      font-weight: bold;
+}
+.login-menu {
+  margin-top: 40px;
+  width: 100%;
+  text-align: center;
+    a {
+      color: #999;
+      font-size: 12px;
+      margin: 0px 8px;
+      text-decoration:none;
     }
-    .set-language {
-      color: #fff;
-      position: absolute;
-      top: 5px;
-      right: 0px;
-    }
-  }
-  .show-pwd {
-    position: absolute;
-    right: 10px;
-    top: 7px;
-    font-size: 16px;
-    color: $dark_gray;
-    cursor: pointer;
-    user-select: none;
-  }
-  .thirdparty-button {
-    position: absolute;
-    right: 0;
-    bottom: 6px;
-  }
 }
 </style>
