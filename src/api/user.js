@@ -1,9 +1,9 @@
-import request from '@/utils/request'
+import request from '@/axios';
 
 export function login(data) {
   return request({
-    url: '/account/login',
-    method: 'post',
+    url: '/mock/account/login',
+    method: 'get',
     params: {
       "username": data.username,
       "password": data.password
@@ -13,14 +13,14 @@ export function login(data) {
 
 export function getInfo() {
   return request({
-    url: '/account/info',
+    url: '/mock/account/info',
     method: 'get'
   })
 }
 
 export function logout(token) {
   return request({
-    url: '/account/logout',
+    url: '/mock/account/logout',
     method: 'post'
   })
 }

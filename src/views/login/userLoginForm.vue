@@ -79,11 +79,10 @@
         }
       },
       showPassword() {
-        this.passwordType == ""
-          ? (this.passwordType = "password")
-          : (this.passwordType = "");
+        this.passwordType == "" ? (this.passwordType = "password") : (this.passwordType = "");
       },
       handleLogin() {
+        let redirect = this.redirect;
         this.$refs.loginForm.validate(valid => {
           if (valid) {
             const loading = this.$loading({
@@ -93,11 +92,7 @@
             });
             this.$store.dispatch("user/login", this.loginForm).then(() => {
               loading.close();
-              if(redirect){
-                this.$router.push(redirect)
-              }else {
-                this.$router.push({ path: this.redirect })
-              }
+              this.$router.push({ path: this.redirect })
             }).catch(() => {
               loading.close()
             });

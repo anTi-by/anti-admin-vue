@@ -19,7 +19,6 @@ router.beforeEach(async(to, from, next) => {
   NProgress.start()
   // set page title
   document.title = getPageTitle(to.meta.title)
-  debugger;
   // determine whether the user has logged in
   const hasToken = getToken()
   if (hasToken) {
@@ -28,25 +27,25 @@ router.beforeEach(async(to, from, next) => {
       NProgress.done()
     } else {
       next()
-      // const hasRoles = store.getters.roles && store.getters.roles.length > 0
-      // if (hasRoles) {
-      //   next()
-      // } else {
-      //   try {
-      //     // get user info
-      //     store.dispatch('user/getInfo')
-      //     const accessRoutes  = await store.dispatch('menu/getSideMenus');
-      //     router.addRoutes(accessRoutes)
-      //     next({ ...to, replace: true })
-      //   } catch (error) {
-      //     console.log('error',error)
-      //     // remove token and go to login page to re-login
-      //     await store.dispatch('user/resetToken')
-      //     Message.error(error || 'Has Error')
-      //     next(`/login?redirect=${to.path}`)
-      //     NProgress.done()
-      //   }
-      // }
+      const hasRoles = store.getters.roles && store.getters.roles.length > 0
+      if (hasRoles) {
+        next()
+      } else {
+        try {
+          // get user info
+          store.dispatch('user/getInfo')
+          const accessRoutes  = await store.dispatch('menu/getSideMenus');
+          router.addRoutes(accessRoutes)
+          next({ ...to, replace: true })
+        } catch (error) {
+          console.log('error',error)
+          // remove token and go to login page to re-login
+          await store.dispatch('user/resetToken')
+          Message.error(error || 'Has Error')
+          next(`/login?redirect=${to.path}`)
+          NProgress.done()
+        }
+      }
     }
   } else {
     /* has no token*/

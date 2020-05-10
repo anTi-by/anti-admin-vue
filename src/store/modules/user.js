@@ -54,6 +54,7 @@ const actions = {
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo().then(response => {
+    
         const { data } = response
         if (!data) {
           reject('Verification failed, please Login again.')
@@ -71,7 +72,18 @@ const actions = {
       })
     })
   },
-
+  //注销session
+  FedLogOut({ commit }) {
+    return new Promise(resolve => {
+        commit('SET_TOKEN', '')
+        commit('SET_MENU', [])
+        commit('SET_ROLES', [])
+        commit('DEL_ALL_TAG');
+        commit('CLEAR_LOCK');
+        removeToken()
+        resolve()
+    })
+  },
   // user logout
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
