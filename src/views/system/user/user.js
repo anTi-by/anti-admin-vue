@@ -67,7 +67,7 @@ export default {
       },
       total: 0,
       list: null,
-      listLoading: true,
+      listLoading: false,
       selRow: {}
     }
   },
@@ -82,7 +82,7 @@ export default {
     }
   },
   created() {
-    this.init()
+   // this.init()
   },
   methods: {
     init() {

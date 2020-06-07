@@ -9,21 +9,21 @@
           <el-input v-model="listQuery.name" size="mini" placeholder="请输入姓名"></el-input>
         </el-col>
         <el-col :span="6">
-          <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}</el-button>
-          <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">{{ $t('button.reset') }}</el-button>
+          <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">搜索</el-button>
+          <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">重置</el-button>
         </el-col>
       </el-row>
       <br>
-      <el-row>
+      <el-row> 
         <el-col :span="24">
           <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add" v-permission="['/mgr/add']">
-            {{$t('button.add') }}
+           新增
           </el-button>
           <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit" v-permission="['/mgr/edit']">
-            {{$t('button.edit') }}
+           修改
           </el-button>
           <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove" v-permission="['/mgr/delete']">
-            {{$t('button.delete') }}
+           删除
           </el-button>
           <el-button type="info" size="mini" icon="el-icon-role" @click.native="openRole">角色分配</el-button>
         </el-col>
@@ -166,15 +166,15 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="出生日期">
-                <el-date-picker type="date" placeholder="选择日期" v-model="form.birthday" style="width: 100%;">
+                <el-date-picker type="date" placeholder="选择日期" value-format="yyyyMMdd" v-model="form.birthday" style="width: 100%;">
 
                 </el-date-picker>
             </el-form-item>
           </el-col>
         </el-row>
         <el-form-item>
-          <el-button type="primary" @click="saveUser">{{ $t('button.submit') }}</el-button>
-          <el-button @click.native="formVisible = false">{{ $t('button.cancel') }}</el-button>
+          <el-button type="primary" @click="saveUser">提交</el-button>
+          <el-button @click.native="formVisible = false">关闭</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -198,7 +198,7 @@
           </el-col>
         </el-row>
         <el-form-item>
-          <el-button type="primary" @click="setRole">{{ $t('button.submit') }}</el-button>
+          <el-button type="primary" @click="setRole">提交</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>

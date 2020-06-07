@@ -83,6 +83,36 @@ export default [
             "children":[
               {
                 "children":[],
+                "component":"views/system/user/index",
+                "hidden":false,
+                "id":"2",
+                "meta":{
+                  "icon":"user",
+                  "title":"用户管理"
+                },
+                "name":"用户管理",
+                "num":1,
+                "parentId":"71",
+                "path":"/user"
+              }
+            ],
+            "component":"layout",
+            "hidden":false,
+            "id":"1",
+            "meta":{
+              "icon":"system",
+              "title":"系统管理"
+            },
+            "name":"系统管理",
+            "num":1,
+            "parentId":"0",
+            "path":"/system",
+            "redirect":"noRedirect"
+          },
+          {
+            "children":[
+              {
+                "children":[],
                 "component":"views/shop/shopUser/index",
                 "hidden":false,
                 "id":"72",
@@ -120,7 +150,8 @@ export default [
             "name":"商城管理",
             "num":1,
             "parentId":"0",
-            "path":"/shop"
+            "path":"/shop",
+            "redirect":"noRedirect"
           }
         ],
         "msg":"成功",
